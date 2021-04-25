@@ -1,0 +1,78 @@
+[gd_scene load_steps=11 format=2]
+
+[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://UI/HealthUi.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Environment/Grass/GrassDefault.png" type="Texture" id=3]
+[ext_resource path="res://Environment/GroundTileSet.tres" type="TileSet" id=4]
+[ext_resource path="res://Environment/WaterTileSet.tres" type="TileSet" id=5]
+[ext_resource path="res://Environment/GroundObjsTileset.tres" type="TileSet" id=6]
+[ext_resource path="res://Scenes/Environment.gd" type="Script" id=7]
+[ext_resource path="res://Weapons/PunchAttack.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Enemies/FlyingEnemy.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Camera/Camera2D.tscn" type="PackedScene" id=10]
+
+[node name="Scene1" type="Node2D"]
+
+[node name="Camera2D" parent="." instance=ExtResource( 10 )]
+position = Vector2( 126.651, 93.3528 )
+
+[node name="TopLeft" parent="Camera2D/Limits" index="0"]
+position = Vector2( -80, -24 )
+
+[node name="BottomRight" parent="Camera2D/Limits" index="1"]
+position = Vector2( 384, 232 )
+
+[node name="Environment" type="Node2D" parent="."]
+script = ExtResource( 7 )
+
+[node name="Grass" type="Sprite" parent="Environment"]
+position = Vector2( 152, 96 )
+texture = ExtResource( 3 )
+region_enabled = true
+region_rect = Rect2( 0, 0, 848, 496 )
+
+[node name="Ground" type="TileMap" parent="Environment"]
+tile_set = ExtResource( 4 )
+cell_size = Vector2( 32, 32 )
+format = 1
+tile_data = PoolIntArray( 65536, 0, 65536, 65541, 0, 65537, 65542, 0, 65538, 65545, 0, 65536, 131072, 0, 131072, 131074, 0, 65537, 131075, 0, 196609, 131078, 0, 131072, 131081, 0, 131072, 196608, 0, 131072, 196614, 0, 131072, 196617, 0, 131072, 262144, 0, 131072, 262148, 0, 4, 262149, 0, 5, 262150, 0, 327685, 262153, 0, 131072, 327680, 0, 65539, 327681, 0, 196610, 327682, 0, 196610, 327683, 0, 196610, 327684, 0, 327686, 327685, 0, 131077, 327686, 0, 327682, 327687, 0, 196610, 327688, 0, 196610, 327689, 0, 1 )
+
+[node name="Lake" type="TileMap" parent="Environment"]
+visible = false
+tile_set = ExtResource( 5 )
+cell_size = Vector2( 32, 32 )
+format = 1
+
+[node name="GroundObjs" type="TileMap" parent="Environment"]
+visible = false
+tile_set = ExtResource( 6 )
+cell_size = Vector2( 32, 32 )
+format = 1
+
+[node name="YSort" type="YSort" parent="."]
+
+[node name="Weapon1" parent="YSort" instance=ExtResource( 8 )]
+position = Vector2( 172.407, 79.6844 )
+
+[node name="Player" parent="YSort" instance=ExtResource( 1 )]
+position = Vector2( 126.651, 93.3528 )
+collision_mask = 48
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="YSort/Player"]
+remote_path = NodePath("../../../Camera2D")
+
+[node name="FlyingEnemy" parent="YSort" instance=ExtResource( 9 )]
+position = Vector2( 208, 128 )
+
+[node name="FlyingEnemy2" parent="YSort" instance=ExtResource( 9 )]
+position = Vector2( 48, 48 )
+
+[node name="FlyingEnemy3" parent="YSort" instance=ExtResource( 9 )]
+position = Vector2( 48, 136 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HealthUi" parent="CanvasLayer" instance=ExtResource( 2 )]
+margin_bottom = 8.0
+
+[editable path="Camera2D"]
