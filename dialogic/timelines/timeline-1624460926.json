@@ -1,0 +1,42 @@
+{
+	"events": [
+		{
+			"action": "join",
+			"character": "character-1624460274.json",
+			"event_id": "dialogic_002",
+			"mirror": false,
+			"portrait": "",
+			"position": {
+				"0": true,
+				"1": false,
+				"2": false,
+				"3": false,
+				"4": false
+			}
+		},
+		{
+			"event_id": "dialogic_024",
+			"set_theme": "theme-1624460978.cfg"
+		},
+		{
+			"character": "character-1624460274.json",
+			"event_id": "dialogic_001",
+			"portrait": "",
+			"text": "O bagulho é doido!"
+		},
+		{
+			"action": "leaveall",
+			"character": "[All]",
+			"event_id": "dialogic_003"
+		},
+		{
+			"event_id": "dialogic_022",
+			"transition_duration": 0.3
+		}
+	],
+	"metadata": {
+		"dialogic-version": "1.2",
+		"file": "timeline-1624460926.json",
+		"name": "Dialogue1"
+	}
+}
