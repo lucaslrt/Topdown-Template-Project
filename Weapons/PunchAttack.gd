@@ -1,14 +1,9 @@
 extends Node2D
 
 export(int) var weapon_damage = 1
+export(PackedScene) var weapon_state_path
 
 func _ready():
-	pass
-
-func _send_state(character):
-	var state = get_node("PunchState")
-	remove_child(state)
-	character.add_state(state)
 	pass
 	
 func _send_weapon_hitbox(character):
@@ -19,7 +14,7 @@ func _send_weapon_hitbox(character):
 
 func _on_Area2D_body_entered(body):
 	print("PunchAttack -> mandando o estado para ", body.name)
-	_send_state(body)
+	body.state_machine.enable_state("PunchState")
 	_send_weapon_hitbox(body)
 	queue_free()
 	pass # Replace with function body.

@@ -9,11 +9,11 @@ onready var current_state: State
 func get_class():
 	return "StateMachine"
 
-func add_state(state: State):
-	print("StateMachine -> state_received = ", state.name)
-	self.add_child(state)
-	
-	state.connect("state_changed", self, "_on_state_changed")
+func enable_state(state_name: String):
+	print("StateMachine -> state_enabled = ", state_name)
+	for state in self.get_children():
+		if state.name == state_name:
+			state.available = true
 
 func remove_state(state):
 	remove_child(state)
@@ -27,12 +27,9 @@ func on_state_action_finished():
 	current_state.finish_action()
 
 func _ready():
-	print("StateMachine -> current_class = ", get_class())
+	#print("StateMachine -> current_class = ", get_class())
 	character = get_parent()
-	print("StateMachine -> parent_class = ", character.name)
-	
-	
-#	print("StateMachine -> current_state = ", current_state.name)
+	#print("StateMachine -> parent_class = ", character.name)
 	pass
 
 func _physics_process(delta):

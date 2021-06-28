@@ -41,5 +41,5 @@ func _handle_input_actions():
 	if Input.is_action_just_pressed("ui_dodge"):
 		emit_signal("state_changed", "DodgeState")
 	elif Input.is_action_just_pressed("ui_attack"):
-		emit_signal("state_changed", "PunchState")
+		emit_signal("state_changed", "AttackState")
 	pass

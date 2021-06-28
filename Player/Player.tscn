@@ -1,4 +1,4 @@
-[gd_scene load_steps=64 format=2]
+[gd_scene load_steps=65 format=2]
 
 [ext_resource path="res://Scenes/Player.gd" type="Script" id=1]
 [ext_resource path="res://Player/PlayerDefault.png" type="Texture" id=2]
@@ -17,6 +17,7 @@
 [ext_resource path="res://Overlap/Hurtbox.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Audio/Punch.ogg" type="AudioStream" id=16]
 [ext_resource path="res://Shaders/BlinkEffect.shader" type="Shader" id=17]
+[ext_resource path="res://StateMachine/PunchState.tscn" type="PackedScene" id=18]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 17 )
@@ -769,6 +770,8 @@ script = ExtResource( 11 )
 [node name="MoveState" type="Node" parent="StateMachine"]
 script = ExtResource( 13 )
 
+[node name="PunchState" parent="StateMachine" instance=ExtResource( 18 )]
+
 [node name="HitboxPivot" type="Position2D" parent="."]
 rotation = -1.5708
 
@@ -795,7 +798,7 @@ anims/Start = SubResource( 45 )
 anims/Stop = SubResource( 46 )
 
 [connection signal="state_changed" from="StateMachine/DodgeState" to="StateMachine" method="_on_state_changed"]
-[connection signal="state_changed" from="StateMachine/AttackState" to="." method="_on_state_changed"]
+[connection signal="state_changed" from="StateMachine/AttackState" to="StateMachine" method="_on_state_changed"]
 [connection signal="state_changed" from="StateMachine/MoveState" to="StateMachine" method="_on_state_changed"]
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
