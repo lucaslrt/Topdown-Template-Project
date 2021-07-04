@@ -1,23 +1,30 @@
 extends State
-class_name AttackStateDecorator
+class_name AttackState
 
-var attack_list = {}
+#var punch = get_parent().get_node("PunchState")
+
+enum ATTACK_TYPE {HAND, SHOOT}
 
 func make_action(delta):
-	if attack_list.empty():
-		finish_action()
+	var selected_weapon: WeaponItem = character.inventory.get_selected_item(0)
+	if selected_weapon != null:
+#		_apply_weapon_hitbox(selected_weapon.hitbox_collision_area)
+		_handle_animation(selected_weapon.name)
 	else:
-		_handle_animation()
+		finish_action()
 	pass
 
-func _handle_animation():
-	character.animation_state.travel("Punch")
-	character.animation_tree.set("parameters/Punch/blend_position", character.current_direction)
+func _apply_weapon_hitbox(hitbox):
+	character.change_hitbox(hitbox)
+	pass
+
+func _handle_animation(weapon_name):
+	character.animation_state.travel(weapon_name)
+	character.animation_tree.set("parameters/" + weapon_name + "/blend_position", character.current_direction)
 	pass
 
 func update_action(is_first: bool):
-	
-	var weapon_hitbox_collider = character.weapon_hitbox.get_node("CollisionShape2D")
+	var weapon_hitbox_collider = character.hitbox_pivot.get_child(0).get_child(0)
 	weapon_hitbox_collider.disabled = !is_first
 	pass
 

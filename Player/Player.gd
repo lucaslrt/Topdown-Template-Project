@@ -2,6 +2,7 @@ extends KinematicBody2D
 class_name Character
 
 const PlayerHurtSound = preload("res://Player/PlayerHurtSound.tscn")
+var inventory: Inventory = preload("res://Weapons/Inventory.tres")
 
 var velocity = Vector2.ZERO
 var current_direction = Vector2.DOWN
@@ -11,7 +12,7 @@ onready var state_machine = $StateMachine
 onready var animation_player = $AnimationPlayer
 onready var animation_tree = $AnimationTree
 onready var animation_state = $AnimationTree.get("parameters/playback")
-onready var weapon_hitbox = $HitboxPivot/Hitbox
+onready var hitbox_pivot = $HitboxPivot
 onready var hurtbox = $Hurtbox
 onready var blink_effect = $BlinkEffectAnimationPlayer
 
@@ -21,28 +22,20 @@ func _ready():
 	animation_tree.active = true
 	state_machine.current_state = $StateMachine/MoveState
 	pass
-#
-## warning-ignore:unused_argument
-#func _physics_process(delta):
-#	pass
-
-func add_weapon_hitbox(new_weapon_hitbox):
-	var new_collision_shape = weapon_hitbox.get_node("CollisionShape2D")
-	new_weapon_hitbox.remove_child(new_collision_shape)
-	new_collision_shape.disabled = true
-	
-	self.weapon_hitbox.remove_child($HitboxPivot/Hitbox/CollisionShape2D)
-	self.weapon_hitbox.add_child(new_collision_shape)
-	
-	print("Player -> weapon_hitbox.disabled = ", self.weapon_hitbox.get_node("CollisionShape2D").disabled)
-	pass
 
 func _apply_movement():
 	velocity = move_and_slide(velocity)
 	pass
 
-func _unhandled_key_input(event):
+func add_weapon(weapon: WeaponItem):
+	inventory.add_item(weapon)
+	change_hitbox(weapon.hitbox_collision_area)
 	pass
+
+func change_hitbox(hitbox: PackedScene):
+	hitbox_pivot.remove_child(hitbox_pivot.get_child(0))
+	var new_weapon_hitbox = hitbox.instance()
+	hitbox_pivot.add_child(new_weapon_hitbox)
 
 func _on_Hurtbox_area_entered(area):
 	print("Player -> hurtbox area entered: ", area.name)

@@ -10,14 +10,14 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "State",
-"class": "AttackStateDecorator",
+"class": "AttackState",
 "language": "GDScript",
 "path": "res://Player/AttackState.gd"
 }, {
 "base": "KinematicBody2D",
 "class": "Character",
 "language": "GDScript",
-"path": "res://Scenes/Player.gd"
+"path": "res://Player/Player.gd"
 }, {
 "base": "Node",
 "class": "Dialogic",
@@ -44,6 +44,11 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/dialogic/Other/DialogicUtil.gd"
 }, {
+"base": "Resource",
+"class": "Inventory",
+"language": "GDScript",
+"path": "res://Weapons/Inventory.gd"
+}, {
 "base": "Node",
 "class": "State",
 "language": "GDScript",
@@ -53,17 +58,24 @@ _global_script_classes=[ {
 "class": "StateMachine",
 "language": "GDScript",
 "path": "res://GlobalScripts/StateMachine.gd"
+}, {
+"base": "Resource",
+"class": "WeaponItem",
+"language": "GDScript",
+"path": "res://Weapons/WeaponItem.gd"
 } ]
 _global_script_class_icons={
-"AttackStateDecorator": "",
+"AttackState": "",
 "Character": "",
 "Dialogic": "",
 "DialogicBackgroundMusic": "",
 "DialogicDefinitionsUtil": "",
 "DialogicResources": "",
 "DialogicUtil": "",
+"Inventory": "",
 "State": "",
-"StateMachine": ""
+"StateMachine": "",
+"WeaponItem": "res://Weapons/Punch/Hand.png"
 }
 
 [application]
@@ -88,7 +100,7 @@ window/stretch/aspect="keep"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/dialogic/plugin.cfg" )
+enabled=PoolStringArray(  )
 
 [importer_defaults]
 

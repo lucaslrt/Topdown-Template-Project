@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://Weapons/PunchState.gd" type="Script" id=1]
+[ext_resource path="res://Weapons/Punch/PunchState.gd" type="Script" id=1]
 
 [node name="PunchState" type="Node"]
 script = ExtResource( 1 )

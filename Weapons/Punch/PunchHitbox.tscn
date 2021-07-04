@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Overlap/Hitbox.tscn" type="PackedScene" id=1]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 7.63032
+height = 10.5206
+
+[node name="HitboxPunch" instance=ExtResource( 1 )]
+collision_layer = 64
+collision_mask = 8
+damage = 2
+
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2( 8.68, 0 )
+shape = SubResource( 1 )

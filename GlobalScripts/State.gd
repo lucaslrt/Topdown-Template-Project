@@ -5,11 +5,11 @@ class_name State
 export(bool) var available = false
 
 signal state_changed(state_name)
-var character: Node2D
+var character: Character
 
 func _ready():
 	if get_parent().get_class() == "StateMachine":
-		character = get_parent().get_parent()
+		character = get_parent().get_parent() as Character
 		#print(self.name, " -> State em ", character.name)
 	pass
 

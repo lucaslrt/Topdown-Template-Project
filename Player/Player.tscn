@@ -1,6 +1,6 @@
-[gd_scene load_steps=65 format=2]
+[gd_scene load_steps=66 format=2]
 
-[ext_resource path="res://Scenes/Player.gd" type="Script" id=1]
+[ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Player/PlayerDefault.png" type="Texture" id=2]
 [ext_resource path="res://Player/Animations/RunSide.tres" type="Animation" id=3]
 [ext_resource path="res://Player/Animations/IdleSide.tres" type="Animation" id=4]
@@ -18,6 +18,7 @@
 [ext_resource path="res://Audio/Punch.ogg" type="AudioStream" id=16]
 [ext_resource path="res://Shaders/BlinkEffect.shader" type="Shader" id=17]
 [ext_resource path="res://StateMachine/PunchState.tscn" type="PackedScene" id=18]
+[ext_resource path="res://Player/WeaponInventory.gd" type="Script" id=19]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 17 )
@@ -678,7 +679,7 @@ states/Run/node = SubResource( 33 )
 states/Run/position = Vector2( 318, 71 )
 transitions = [ "Idle", "Run", SubResource( 34 ), "Run", "Idle", SubResource( 35 ), "Idle", "Dodge", SubResource( 36 ), "Dodge", "Idle", SubResource( 37 ), "Punch", "Idle", SubResource( 38 ), "Idle", "Punch", SubResource( 39 ) ]
 start_node = "Idle"
-graph_offset = Vector2( -396.465, -84.2304 )
+graph_offset = Vector2( -396.465, 7.37168 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=41]
 
@@ -719,9 +720,10 @@ script = ExtResource( 1 )
 material = SubResource( 1 )
 position = Vector2( 0, -8 )
 texture = ExtResource( 2 )
+flip_h = true
 hframes = 9
 vframes = 8
-frame = 24
+frame = 57
 
 [node name="ColliderBox" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 1.884 )
@@ -796,6 +798,9 @@ stream = ExtResource( 16 )
 [node name="BlinkEffectAnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Start = SubResource( 45 )
 anims/Stop = SubResource( 46 )
+
+[node name="Inventory" type="Node" parent="."]
+script = ExtResource( 19 )
 
 [connection signal="state_changed" from="StateMachine/DodgeState" to="StateMachine" method="_on_state_changed"]
 [connection signal="state_changed" from="StateMachine/AttackState" to="StateMachine" method="_on_state_changed"]

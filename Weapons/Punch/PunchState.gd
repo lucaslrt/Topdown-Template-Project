@@ -14,7 +14,6 @@ func _handle_animation():
 	pass
 
 func update_action(is_first: bool):
-	
 	var weapon_hitbox_collider = character.weapon_hitbox.get_node("CollisionShape2D")
 	weapon_hitbox_collider.disabled = !is_first
 	pass

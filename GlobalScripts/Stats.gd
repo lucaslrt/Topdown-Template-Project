@@ -2,10 +2,16 @@ extends Node
 
 export(int) var max_health = 1 setget set_max_health
 var current_health = max_health setget set_current_health
+var current_attack = 0 setget set_current_attack
 
 signal no_health
 signal health_changed(value)
 signal max_health_changed(value)
+signal attack_changed(value)
+
+func _ready():
+	current_health = max_health
+	pass
 
 func set_max_health(value):
 	max_health = value
@@ -20,6 +26,7 @@ func set_current_health(value):
 		emit_signal("no_health")
 	pass
 
-func _ready():
-	current_health = max_health
+func set_current_attack(value):
+	current_attack = value
+	emit_signal("attack_changed", current_attack)
 	pass
