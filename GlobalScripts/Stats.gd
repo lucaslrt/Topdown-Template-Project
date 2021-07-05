@@ -2,7 +2,7 @@ extends Node
 
 export(int) var max_health = 1 setget set_max_health
 var current_health = max_health setget set_current_health
-var current_attack = 0 setget set_current_attack
+var current_attack = "None" setget set_current_attack
 
 signal no_health
 signal health_changed(value)

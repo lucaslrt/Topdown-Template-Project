@@ -27,9 +27,24 @@ func _apply_movement():
 	velocity = move_and_slide(velocity)
 	pass
 
+func _unhandled_input(event):
+	if event.is_action_pressed("ui_select_weapon_1"):
+		select_weapon(0)
+	elif event.is_action_pressed("ui_select_weapon_2"):
+		select_weapon(1)
+	elif event.is_action_pressed("ui_select_weapon_3"):
+		select_weapon(2)
+	pass
+
+func select_weapon(position):
+	var weapon: WeaponItem = inventory.get_selected_item(position)
+	if weapon != null:
+		change_hitbox(weapon.hitbox_collision_area)
+		stats.current_attack = weapon.name
+
 func add_weapon(weapon: WeaponItem):
 	inventory.add_item(weapon)
-	change_hitbox(weapon.hitbox_collision_area)
+	select_weapon(inventory.get_item_position(weapon))
 	pass
 
 func change_hitbox(hitbox: PackedScene):

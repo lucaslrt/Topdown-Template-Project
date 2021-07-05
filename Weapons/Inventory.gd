@@ -5,9 +5,12 @@ signal item_changed(indexes)
 export(Array, Resource) var items = []
 
 func get_selected_item(position) -> Resource:
-	if items.empty():
+	if items.empty() or position >= items.size():
 		return null
 	return items[position]
+
+func get_item_position(item) -> int:
+	return items.find(item)
 
 func add_item(item):
 	if not items.has(item):

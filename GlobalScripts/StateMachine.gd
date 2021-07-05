@@ -6,6 +6,16 @@ class_name StateMachine
 var character: Node2D = get_parent()
 onready var current_state: State
 
+func _ready():
+	#print("StateMachine -> current_class = ", get_class())
+	character = get_parent()
+	#print("StateMachine -> parent_class = ", character.name)
+	pass
+
+func _physics_process(delta):
+	current_state.make_action(delta)
+	pass
+
 func get_class():
 	return "StateMachine"
 
@@ -25,16 +35,6 @@ func on_state_action_update(is_first: bool):
 
 func on_state_action_finished():
 	current_state.finish_action()
-
-func _ready():
-	#print("StateMachine -> current_class = ", get_class())
-	character = get_parent()
-	#print("StateMachine -> parent_class = ", character.name)
-	pass
-
-func _physics_process(delta):
-	current_state.make_action(delta)
-	pass
 
 func change_state_by_name(state_name):
 	for state in self.get_children():

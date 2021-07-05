@@ -12,7 +12,7 @@
 [ext_resource path="res://Camera/Camera2D.tscn" type="PackedScene" id=10]
 [ext_resource path="res://icon.png" type="Texture" id=11]
 [ext_resource path="res://Scenes/DialogueArea.gd" type="Script" id=12]
-[ext_resource path="res://Scenes/PlayerStatusDebug.gd" type="Script" id=13]
+[ext_resource path="res://Scenes/StatsDebug.gd" type="Script" id=13]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 38.1217
@@ -100,12 +100,11 @@ position = Vector2( 48, 136 )
 margin_bottom = 8.0
 
 [node name="CurrentAttack" type="Label" parent="CanvasLayer"]
-visible = false
 anchor_left = 1.0
 anchor_right = 1.0
 margin_left = -40.0
 margin_bottom = 14.0
-text = "0"
+text = "None"
 align = 1
 script = ExtResource( 13 )
 __meta__ = {
