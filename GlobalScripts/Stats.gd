@@ -3,6 +3,7 @@ extends Node
 export(int) var max_health = 1 setget set_max_health
 var current_health = max_health setget set_current_health
 var current_attack = "None" setget set_current_attack
+var attack_inventory_position = 0 setget set_current_attack
 
 signal no_health
 signal health_changed(value)
@@ -27,6 +28,6 @@ func set_current_health(value):
 	pass
 
 func set_current_attack(value):
-	current_attack = value
+	current_attack = value if value else "None"
 	emit_signal("attack_changed", current_attack)
 	pass

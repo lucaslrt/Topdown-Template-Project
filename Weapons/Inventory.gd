@@ -4,10 +4,16 @@ class_name Inventory
 signal item_changed(indexes)
 export(Array, Resource) var items = []
 
-func get_selected_item(position) -> Resource:
+var selected_item: Resource = null setget set_selected_item
+
+func find_selected_item(position) -> Resource:
 	if items.empty() or position >= items.size():
 		return null
 	return items[position]
+
+func set_selected_item(value: Resource):
+	selected_item = value
+	pass
 
 func get_item_position(item) -> int:
 	return items.find(item)

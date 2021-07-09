@@ -6,16 +6,13 @@ class_name AttackState
 enum ATTACK_TYPE {HAND, SHOOT}
 
 func make_action(delta):
-	var selected_weapon: WeaponItem = character.inventory.get_selected_item(0)
+	var selected_weapon: WeaponItem = character.inventory.selected_item
+	print("AttackState -> ", "fazendo a ação...")
 	if selected_weapon != null:
 #		_apply_weapon_hitbox(selected_weapon.hitbox_collision_area)
 		_handle_animation(selected_weapon.name)
 	else:
 		finish_action()
-	pass
-
-func _apply_weapon_hitbox(hitbox):
-	character.change_hitbox(hitbox)
 	pass
 
 func _handle_animation(weapon_name):

@@ -9,10 +9,10 @@
 [ext_resource path="res://Player/Animations/RunUp.tres" type="Animation" id=7]
 [ext_resource path="res://Player/Animations/IdleDown.tres" type="Animation" id=8]
 [ext_resource path="res://GlobalScripts/StateMachine.gd" type="Script" id=9]
-[ext_resource path="res://Player/DodgeState.gd" type="Script" id=10]
-[ext_resource path="res://Player/AttackState.gd" type="Script" id=11]
+[ext_resource path="res://Player/States/DodgeState.gd" type="Script" id=10]
+[ext_resource path="res://Player/States/AttackState.gd" type="Script" id=11]
 [ext_resource path="res://Overlap/Hitbox.tscn" type="PackedScene" id=12]
-[ext_resource path="res://Player/MoveState.gd" type="Script" id=13]
+[ext_resource path="res://Player/States/MoveState.gd" type="Script" id=13]
 [ext_resource path="res://Player/PlayerStats.tscn" type="PackedScene" id=14]
 [ext_resource path="res://Overlap/Hurtbox.tscn" type="PackedScene" id=15]
 [ext_resource path="res://Audio/Punch.ogg" type="AudioStream" id=16]
@@ -679,7 +679,7 @@ states/Run/node = SubResource( 33 )
 states/Run/position = Vector2( 318, 71 )
 transitions = [ "Idle", "Run", SubResource( 34 ), "Run", "Idle", SubResource( 35 ), "Idle", "Dodge", SubResource( 36 ), "Dodge", "Idle", SubResource( 37 ), "Punch", "Idle", SubResource( 38 ), "Idle", "Punch", SubResource( 39 ) ]
 start_node = "Idle"
-graph_offset = Vector2( -396.465, 7.37168 )
+graph_offset = Vector2( -597.636, -26.4205 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=41]
 
