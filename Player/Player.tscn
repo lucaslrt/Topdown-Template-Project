@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=2]
+[gd_scene load_steps=65 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Player/PlayerDefault.png" type="Texture" id=2]
@@ -18,7 +18,6 @@
 [ext_resource path="res://Audio/Punch.ogg" type="AudioStream" id=16]
 [ext_resource path="res://Shaders/BlinkEffect.shader" type="Shader" id=17]
 [ext_resource path="res://StateMachine/PunchState.tscn" type="PackedScene" id=18]
-[ext_resource path="res://Player/WeaponInventory.gd" type="Script" id=19]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 17 )
@@ -798,9 +797,6 @@ stream = ExtResource( 16 )
 [node name="BlinkEffectAnimationPlayer" type="AnimationPlayer" parent="."]
 anims/Start = SubResource( 45 )
 anims/Stop = SubResource( 46 )
-
-[node name="Inventory" type="Node" parent="."]
-script = ExtResource( 19 )
 
 [connection signal="state_changed" from="StateMachine/DodgeState" to="StateMachine" method="_on_state_changed"]
 [connection signal="state_changed" from="StateMachine/AttackState" to="StateMachine" method="_on_state_changed"]

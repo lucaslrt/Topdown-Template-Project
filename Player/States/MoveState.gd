@@ -16,8 +16,7 @@ func _handle_movement(delta):
 	else:
 		character.velocity = character.velocity.move_toward(Vector2.ZERO, FRICTION * delta)
 	_handle_movement_animation(axis)
-	character._apply_movement()
-	_handle_input_actions()
+	character.move_and_slide(character.velocity)
 	pass
 
 func _get_input_axis() -> Vector2:
@@ -37,9 +36,9 @@ func _handle_movement_animation(axis):
 		character.animation_state.travel("Idle")
 	pass
 
-func _handle_input_actions():
-	if Input.is_action_just_pressed("ui_dodge"):
+func _unhandled_input(event):
+	if event.is_action_pressed("ui_dodge"):
 		emit_signal("state_changed", "DodgeState")
-	elif Input.is_action_just_pressed("ui_attack"):
+	elif event.is_action_pressed("ui_attack"):
 		emit_signal("state_changed", "AttackState")
 	pass

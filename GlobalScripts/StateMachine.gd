@@ -20,7 +20,7 @@ func get_class():
 	return "StateMachine"
 
 func enable_state(state_name: String):
-	print("StateMachine -> state_enabled = ", state_name)
+#	print("StateMachine -> state_enabled = ", state_name)
 	for state in self.get_children():
 		if state.name == state_name:
 			state.available = true
@@ -41,10 +41,10 @@ func change_state_by_name(state_name):
 		if state.name == state_name:
 			current_state = state
 			current_state.start_state()
-			print("StateMachine -> novo current_state = ", current_state.name)
+#			print("StateMachine -> novo current_state = ", current_state.name)
 	pass
 
 func _on_state_changed(state_name):
-	print("StateMachine -> alterando para ", state_name)
+#	print("StateMachine -> alterando para ", state_name)
 	change_state_by_name(state_name)
 	pass # Replace with function body.

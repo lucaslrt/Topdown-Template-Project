@@ -5,7 +5,7 @@ const DODGE_SPEED = 125
 func make_action(delta):
 #	print(self.name, " -> Fazendo a ação")
 	character.velocity = character.current_direction * DODGE_SPEED
-	character._apply_movement()
+	character.move_and_slide(character.velocity)
 	_handle_animation()
 	pass
 

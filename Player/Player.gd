@@ -23,36 +23,10 @@ func _ready():
 	state_machine.current_state = $StateMachine/MoveState
 	pass
 
-func _apply_movement():
-	velocity = move_and_slide(velocity)
-	pass
-
-func _unhandled_input(event):
-	if event.is_action_pressed("ui_select_weapon_1"):
-		select_weapon(0)
-	elif event.is_action_pressed("ui_select_weapon_2"):
-		select_weapon(1)
-	elif event.is_action_pressed("ui_select_weapon_3"):
-		select_weapon(2)
-	pass
-
-func select_weapon(position):
-	var weapon: WeaponItem = inventory.find_selected_item(position)
-	inventory.selected_item = weapon
-	change_hitbox()
-	stats.current_attack = weapon.name if weapon else "None"
-
 func add_weapon(weapon: WeaponItem):
 	inventory.add_item(weapon)
-	select_weapon(inventory.get_item_position(weapon))
+	state_machine.get_node("AttackState").select_weapon(inventory.get_item_position(weapon))
 	pass
-
-func change_hitbox():
-	var weapon: WeaponItem = inventory.selected_item
-	if weapon != null:
-		hitbox_pivot.remove_child(hitbox_pivot.get_child(0))
-		var new_weapon_hitbox = weapon.hitbox_collision_area.instance()
-		hitbox_pivot.add_child(new_weapon_hitbox)
 
 func _on_Hurtbox_area_entered(area):
 	print("Player -> hurtbox area entered: ", area.name)
