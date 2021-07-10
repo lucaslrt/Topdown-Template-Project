@@ -43,5 +43,5 @@ func update_action(is_first: bool):
 	pass
 
 func finish_action():
-	print(self.name, " -> Fim da ação, alterando para MoveState.")
+#	print(self.name, " -> Fim da ação, alterando para MoveState.")
 	emit_signal("state_changed", "MoveState")

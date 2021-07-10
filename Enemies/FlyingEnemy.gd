@@ -1,4 +1,5 @@
-extends KinematicBody2D
+extends Character
+class_name FlyingEnemy
 
 const FlyingEnemyDeathEffect = preload("res://Enemies/FlyingEnemyDeathEffect.tscn")
 
@@ -14,16 +15,26 @@ enum {
 }
 
 var knockback = Vector2.ZERO
-var velocity = Vector2.ZERO
 var state = CHASE
 
 onready var sprite = $Sprite
 onready var stats = $Stats
 onready var playerDetectionZone = $PlayerDetection
-onready var state_machine: StateMachine = $StateMachine
-onready var hurtbox = $Hurtbox
 onready var soft_collision = $SoftCollision
-onready var patrol_state = $PatrolState
+onready var patrol_state = $StateMachine/PatrolState
+
+func _ready():
+	$StateMachine.current_state = $StateMachine/IdleState
+	pass
+
+func _physics_process(delta):
+	knockback = knockback.move_toward(Vector2.ZERO, 200 * delta)
+	knockback = move_and_slide(knockback)
+
+	if soft_collision.is_colliding():
+		velocity += soft_collision.get_push_vector() * delta * 400
+	velocity = move_and_slide(velocity)
+	pass
 
 func pick_random_state(state_list):
 	state_list.shuffle()
@@ -34,43 +45,17 @@ func seek_player():
 		state = CHASE
 	pass
 
-func _ready():
-	state = pick_random_state([IDLE, PATROL])
-	$StateMachine.current_state = $StateMachine/IdleState
-	pass
-
-func _physics_process(delta):
-	knockback = knockback.move_toward(Vector2.ZERO, FRICTION * delta)
-	knockback = move_and_slide(knockback)
-
-	match state:
-		IDLE:
-			velocity = velocity.move_toward(Vector2.ZERO, FRICTION * delta)
-			seek_player()
-			if patrol_state.get_time_left() == 0:
-				_update_patrol()
-
-		PATROL:
-			if patrol_state.get_time_left() == 0:
-				_update_patrol()
-			_accelerate_twoards_point(patrol_state.target_position, delta)
-			if global_position.distance_to(patrol_state.target_position) <= PATROL_TARGET_RANGE:
-				_update_patrol()
-
-		CHASE:
-			var player = playerDetectionZone.player
-			if player != null:
-				_accelerate_twoards_point(player.global_position, delta)
-			else:
-				state = IDLE
-
-	if soft_collision.is_colliding():
-		velocity += soft_collision.get_push_vector() * delta * 400
-	velocity = move_and_slide(velocity)
-	pass
+func update_state():
+	if patrol_state.get_time_left() == 0:
+		_update_patrol()
 
 func _update_patrol():
 	state = pick_random_state([IDLE, PATROL])
+	match(state):
+		IDLE:
+			state_machine.change_state_by_name("IdleState")
+		PATROL:
+			state_machine.change_state_by_name("PatrolState")
 	patrol_state.start_patrol_timer(rand_range(1, 3))
 	pass
 
@@ -78,6 +63,7 @@ func _accelerate_twoards_point(point, delta):
 	var direction = global_position.direction_to(point)
 	velocity = velocity.move_toward(direction * MAX_SPEED, ACCELERATION * delta)
 	sprite.flip_h = velocity.x < 0
+	velocity = move_and_slide(velocity)
 	pass
 
 func _show_death_effect():
@@ -99,3 +85,6 @@ func _on_Stats_no_health():
 	_show_death_effect()
 	queue_free()
 	pass
+
+func _on_Timer_timeout():
+	pass # Replace with function body.

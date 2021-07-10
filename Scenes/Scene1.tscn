@@ -89,10 +89,10 @@ remote_path = NodePath("../../../Camera2D")
 position = Vector2( 99.9172, 190.639 )
 
 [node name="FlyingEnemy2" parent="YSort" instance=ExtResource( 9 )]
-position = Vector2( 48, 48 )
+position = Vector2( 42.8528, 142.585 )
 
 [node name="FlyingEnemy3" parent="YSort" instance=ExtResource( 9 )]
-position = Vector2( 48, 136 )
+position = Vector2( 57.8697, 90.1923 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

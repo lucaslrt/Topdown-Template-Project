@@ -1,19 +1,19 @@
-extends KinematicBody2D
-class_name Character
+extends Character
+class_name Player
 
 const PlayerHurtSound = preload("res://Player/PlayerHurtSound.tscn")
 var inventory: Inventory = preload("res://Weapons/Inventory.tres")
 
-var velocity = Vector2.ZERO
-var current_direction = Vector2.DOWN
+#var velocity = Vector2.ZERO
+#var current_direction = Vector2.DOWN
 var stats = PlayerStats
 
-onready var state_machine = $StateMachine
+#onready var state_machine = $StateMachine
 onready var animation_player = $AnimationPlayer
 onready var animation_tree = $AnimationTree
 onready var animation_state = $AnimationTree.get("parameters/playback")
 onready var hitbox_pivot = $HitboxPivot
-onready var hurtbox = $Hurtbox
+#onready var hurtbox = $Hurtbox
 onready var blink_effect = $BlinkEffectAnimationPlayer
 
 func _ready():

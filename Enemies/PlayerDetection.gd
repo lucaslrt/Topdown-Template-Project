@@ -6,6 +6,7 @@ func can_see_player():
 	return player != null
 
 func _on_PlayerDetection_body_entered(body):
+	print("PlayerDetection -> Player localizado.")
 	player = body
 	pass # Replace with function body.
 
