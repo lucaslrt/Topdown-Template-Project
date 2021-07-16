@@ -2,7 +2,7 @@ extends State
 
 
 func make_action(delta):
-	print("Enemy ChaseState -> make_action")
+#	print("Enemy ChaseState -> make_action")
 	var player = character.playerDetectionZone.player
 	if player != null:
 		character._accelerate_twoards_point(player.global_position, delta)
