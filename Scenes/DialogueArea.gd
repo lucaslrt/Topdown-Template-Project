@@ -16,7 +16,7 @@ func _process(delta):
 	
 func _input(event):
 	if get_node_or_null('DialogNode') == null:
-		if event.is_action_pressed("ui_interact"):
+		if event.is_action_pressed("ui_interact") and active:
 			get_tree().paused = true
 			var dialog = Dialogic.start('Dialogue1')
 			dialog.pause_mode = Node.PAUSE_MODE_PROCESS
