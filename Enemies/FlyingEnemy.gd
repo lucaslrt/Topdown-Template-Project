@@ -73,7 +73,7 @@ func _show_death_effect():
 	pass
 
 func _on_Hurtbox_area_entered(area: Area2D):
-	print("FlyingEnemy -> area.disabled = ", area.get_node("CollisionShape2D").disabled)
+#	print("FlyingEnemy -> area.disabled = ", area.get_node("CollisionShape2D").disabled)
 	if !area.get_node("CollisionShape2D").disabled:
 		stats.current_health -= area.damage
 		var character = area.get_parent().get_parent()

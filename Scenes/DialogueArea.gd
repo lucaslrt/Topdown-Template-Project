@@ -1,15 +1,7 @@
 extends Area2D
 
 
-# Declare member variables here. Examples:
-# var a = 2
-# var b = "text"
-
 var active = false
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
 
 func _process(delta):
 	$InteractableSign.visible = active
@@ -29,11 +21,10 @@ func unpause(timeline_name):
 func _on_DialogueArea_body_entered(body):
 	if body.name == 'Player':
 		active = true
-	pass # Replace with function body.
-
+	pass
 
 func _on_DialogueArea_body_exited(body):
 	if body.name == 'Player':
 		active = false
-	pass # Replace with function body.
+	pass
 
