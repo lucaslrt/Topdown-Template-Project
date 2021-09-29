@@ -71,6 +71,7 @@ scale = Vector2( 0.265474, 0.265474 )
 texture = ExtResource( 11 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DialogueArea"]
+position = Vector2( -0.096405, 0 )
 shape = SubResource( 1 )
 
 [node name="YSort" type="YSort" parent="."]
